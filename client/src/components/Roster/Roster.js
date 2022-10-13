@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import styles from './styles.module.css';
 import axios from 'axios';
 import Logout from '../Logout/Logout';
+import PlayerCard from '../PlayerCard/PlayerCard';
+
 
 
 const Roster = () => {
@@ -17,7 +19,7 @@ const Roster = () => {
     try{
       const res = await axios.get(`http://localhost:5500/api/player/${playerNameText}`)
       console.log('player data res', res.data);
-
+      setSearchPlayerResults(res.data);
     }catch(err){
       console.log(err);
       setError("Cant Find Player");
@@ -48,7 +50,7 @@ const Roster = () => {
         <Logout />
       </form>
       <div className={styles.search_results_container}>
-
+        <PlayerCard playerData={searchPlayerResults}/>
       </div>
     </div>
   )
