@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const dotenv = require('dotenv').config({path:"./.env"});
 const { faker } = require('@faker-js/faker');
 
+//TODO save() every team to get team collection
+
 const genAndPopTeams = async (clearTeams = false) => {
   try {
     //get all users
@@ -12,19 +14,23 @@ const genAndPopTeams = async (clearTeams = false) => {
       allUsers.forEach((user) => {
         console.log('USER', user.firstName);
         count = allUsers.length
-        const team = new Team({name: `${user.firstName} ${user.lastName}'s ${faker.lorem.word()}s`, owner: `${user.firstName} ${user.lastName}`, roster: []})
+        const team = new Team({name: `${user.firstName} ${user.lastName}'s ${faker.lorem.word()}s`, owner: `${user.firstName} ${user.lastName}`, roster: []});
+  
+
         if (!clearTeams) {
           if (user.teams.length > 0) {
             user.teams = []
           }
+          team.save();
           user.teams.push(team);
         } else if (clearTeams) {
           if (user.teams.length >= 0) {
             user.teams = []
+            Team.collection.drop();
           }
         }
 
-         //save user with league
+         //save user with team
          user.save((err, result) => {
           if (err) {
             console.log('err saving', err.message);
@@ -56,5 +62,7 @@ mongoose
   .then(() => {
     console.log("connected to db ready to seed leagues");
   });
-
+  // // populate teams
   genAndPopTeams();
+  // erase teams
+  // genAndPopTeams(true);

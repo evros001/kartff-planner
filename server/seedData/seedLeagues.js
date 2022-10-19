@@ -3,15 +3,25 @@ const { League } = require('../models/league');
 const mongoose = require("mongoose");
 const dotenv = require('dotenv').config({path:"./.env"});
 
+//TODO save() every team to get league collection
+
 const assignLeagueToUser = async (clearLeagues = false) => {
     //get all users on test db
     try {
         //get all users
         const allUsers = await User.find({});
+        const allLeagues = await League.find({});
         
         //generate only two league
         const leagueOne = new League({name: 'Kart League', commisioner: 'kartleague@test.com', teams: []})
         const leagueTwo = new League({name: 'Actuary League', commisioner: 'actuaryleague@test.com', teams: []});
+        
+        if (allLeagues.length <= 0) {
+          leagueOne.save();
+          leagueTwo.save();
+        } else {
+          League.collection.drop();
+        }
         
         //add league to each user at random
         allUsers.forEach((user) => {
@@ -76,4 +86,7 @@ mongoose
     console.log("connected to db ready to seed leagues");
   });
 
+// populate leagues
 assignLeagueToUser();
+// erase leagues
+// assignLeagueToUser(true);
