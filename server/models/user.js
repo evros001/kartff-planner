@@ -12,7 +12,8 @@ const userSchema = new mongoose.Schema({
   email: {type: String, required: true},
   password: {type: String, required: true},
   leagues: {type: Array, required: true},
-  teams: {type: Array, required: true}
+  teams: {type: Array, required: true},
+  testLogin: {type: String, required: false},
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -20,10 +21,12 @@ userSchema.methods.generateAuthToken = function () {
   return token
 };
 
+userSchema.set('timestamps', true);
+
 const User = mongoose.model("user", userSchema);
 
 const validate = (data) => {
-  console.log('VALIDATE DATA MODEL', data);
+  console.log('VALIDATE DATA MODEL', data.password);
   const schema = Joi.object({
     firstName: Joi.string().required().label("First Name"),
     lastName: Joi.string().required().label("Last Name"),

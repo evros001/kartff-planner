@@ -11,26 +11,8 @@ const SignUp = () => {
     lastName: '',
     email: '',
     password: '',
-    leagues: [
-      {
-        _id: '_test_league_id1',
-        name:"test league 1", 
-        owner: "_test_owner_id"
-      }
-    ],
-    teams: [
-      {
-        _id: '_test_team_id1',
-        name:"test team 1", 
-        owner: "_test_owner_id", 
-        roster: [
-          {
-            name: 'Test Player 1', 
-            position: 'qb'
-          }
-        ]
-      }
-    ]
+    leagues: [],
+    teams: []
   });
   const [error, setError] = useState();
 
@@ -39,10 +21,6 @@ const SignUp = () => {
   const handleChange = ({currentTarget: input}) => {
     setData({...data, [input.name]: input.value})
   }
-
-  useEffect(() => {
-    console.log('UseEffect Data', data);
-  }, [data])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

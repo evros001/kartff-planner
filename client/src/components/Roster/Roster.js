@@ -45,7 +45,7 @@ const Roster = () => {
           placeholder='SEARCH NFL PLAYER' 
           onChange={e => {setPlayerNameText(e.target.value)} } 
           value={playerNameText} />
-        <button type="submit">Add</button>
+        <button type="submit">Search Player</button>
         {error && <div>{error}</div>}
         <Logout />
       </form>
