@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 const leagueSchema = new mongoose.Schema({
 	name: {type: String, required: false},
-	commisioner: {type: String, required: false},
+	commisioner: {type: mongoose.Schema.ObjectId, required: false},
 	teams: {type: Array, required: true},
 });
 

@@ -4,44 +4,41 @@ const mongoose = require("mongoose");
 const dotenv = require('dotenv').config({path:"./.env"});
 const { faker } = require('@faker-js/faker');
 
-//TODO save() every team to get team collection
-
 const genAndPopTeams = async (clearTeams = false) => {
   try {
     //get all users
     const allUsers = await User.find({});
+    let count = allUsers.length
       //create team for all users
       allUsers.forEach((user) => {
-        console.log('USER', user.firstName);
-        count = allUsers.length
-        const team = new Team({name: `${user.firstName} ${user.lastName}'s ${faker.lorem.word()}s`, owner: `${user.firstName} ${user.lastName}`, roster: []});
-  
+        // console.log('USER', user.firstName);
+        // console.log('first count', count);
+        console.log('*')
+        const team = new Team({name: `${user.firstName} ${user.lastName}'s ${faker.lorem.word()}s`, owner: `${user._id} ${user.lastName}`, roster: []});
+        //reset users teams
+        user.teams = []
 
         if (!clearTeams) {
-          if (user.teams.length > 0) {
-            user.teams = []
-          }
           team.save();
           user.teams.push(team);
-        } else if (clearTeams) {
-          if (user.teams.length >= 0) {
-            user.teams = []
-            Team.collection.drop();
-          }
         }
-
          //save user with team
          user.save((err, result) => {
+          console.log('***')
           if (err) {
-            console.log('err saving', err.message);
+            console.log('****')
+            // console.log('err saving', err.message);
             return
           }
           else {
-            console.log('DONE =>', user.firstName);
+            console.log('*****')
+            // console.log('DONE =>', user.firstName);
             count -= 1;
+            // console.log('count', count);
             if (count == 0) {
-              mongoose.disconnect();
-              console.log('MOGO DISCONNECTED');
+              console.log('******')
+              completeConnection(clearTeams);
+              // console.log('MOGO DISCONNECTED');
               return;
             }
           } 
@@ -49,6 +46,16 @@ const genAndPopTeams = async (clearTeams = false) => {
       });
   } catch (err) {
     console.log(err);
+  }
+}
+
+// to be able to handle await in foreach loop async
+const completeConnection = async (clearTeams) => {
+  if (clearTeams) {
+    await Team.collection.drop();
+    mongoose.disconnect();
+  } else {
+    mongoose.disconnect();
   }
 }
 
@@ -63,6 +70,6 @@ mongoose
     console.log("connected to db ready to seed leagues");
   });
   // // populate teams
-  genAndPopTeams();
+  // genAndPopTeams();
   // erase teams
-  // genAndPopTeams(true);
+  genAndPopTeams(true);

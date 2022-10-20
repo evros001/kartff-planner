@@ -13,8 +13,8 @@ const assignLeagueToUser = async (clearLeagues = false) => {
         const allLeagues = await League.find({});
         
         //generate only two league
-        const leagueOne = new League({name: 'Kart League', commisioner: 'kartleague@test.com', teams: []})
-        const leagueTwo = new League({name: 'Actuary League', commisioner: 'actuaryleague@test.com', teams: []});
+        const leagueOne = new League({name: 'Kart League', commisioner: allUsers[0]._id, teams: []})
+        const leagueTwo = new League({name: 'Actuary League', commisioner: allUsers[1]._id, teams: []});
         
         if (allLeagues.length <= 0) {
           leagueOne.save();
@@ -31,17 +31,11 @@ const assignLeagueToUser = async (clearLeagues = false) => {
                 ? leagueOne
                 : leagueTwo
             console.log('user', user.firstName);
+            user.leagues = [];
             
             //force one league per user
             if (!clearLeagues) {
-              if (user.leagues.length > 0) {
-                user.leagues = []
-              }
-              user.leagues.push(whichLeague);
-            } else if (clearLeagues) {
-              if (user.leagues.length >= 0) {
-                user.leagues = []
-              }
+              user.leagues.push(whichLeague._id);
             }
             
             //save user with league
@@ -88,5 +82,6 @@ mongoose
 
 // populate leagues
 assignLeagueToUser();
+
 // erase leagues
 // assignLeagueToUser(true);
