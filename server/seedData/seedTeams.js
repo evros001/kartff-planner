@@ -1,5 +1,6 @@
 const { User, validate } = require('../models/user');
 const { Team } = require('../models/team');
+const { League } = require('../models/league');
 const mongoose = require("mongoose");
 const dotenv = require('dotenv').config({path:"./.env"});
 const { faker } = require('@faker-js/faker');
@@ -10,7 +11,7 @@ const genAndPopTeams = async (clearTeams = false) => {
     const allUsers = await User.find({});
     let count = allUsers.length
       //create team for all users
-      allUsers.forEach((user) => {
+      allUsers.forEach(async (user) => {
         // console.log('USER', user.firstName);
         // console.log('first count', count);
         console.log('*')
@@ -22,10 +23,12 @@ const genAndPopTeams = async (clearTeams = false) => {
         });
         //reset users teams
         user.teams = []
+        
 
         if (!clearTeams) {
           team.save();
           user.teams.push(team._id);
+          await relateTeamToLeague(user, team);
         }
          //save user with team
          user.save((err, result) => {
@@ -54,9 +57,17 @@ const genAndPopTeams = async (clearTeams = false) => {
   }
 }
 
+const relateTeamToLeague = async (user, team) => {
+  console.log(user.leagues);
+  const league = await League.findById(user.leagues[0]._id);
+  league.teams.push(team._id);
+  league.save();
+}
+
 // to be able to handle await in foreach loop async
 const completeConnection = async (clearTeams) => {
   if (clearTeams) {
+    await League.collection.drop();
     await Team.collection.drop();
     mongoose.disconnect();
   } else {
