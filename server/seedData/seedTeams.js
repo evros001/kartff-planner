@@ -14,13 +14,18 @@ const genAndPopTeams = async (clearTeams = false) => {
         // console.log('USER', user.firstName);
         // console.log('first count', count);
         console.log('*')
-        const team = new Team({name: `${user.firstName} ${user.lastName}'s ${faker.lorem.word()}s`, owner: `${user._id} ${user.lastName}`, roster: []});
+        const team = new Team({
+          name: `${user.firstName} ${user.lastName}'s ${faker.lorem.word()}s`,
+          league: user.leagues[0]._id,
+          owner: user._id, 
+          roster: []
+        });
         //reset users teams
         user.teams = []
 
         if (!clearTeams) {
           team.save();
-          user.teams.push(team);
+          user.teams.push(team._id);
         }
          //save user with team
          user.save((err, result) => {
@@ -69,7 +74,9 @@ mongoose
   .then(() => {
     console.log("connected to db ready to seed leagues");
   });
+  
   // // populate teams
-  // genAndPopTeams();
+  genAndPopTeams();
+  
   // erase teams
-  genAndPopTeams(true);
+  // genAndPopTeams(true);
