@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "dropDb": "node ./seedData/dropDb.js",
     "buildUsers": "node ./seedData/seedUsers.js",
     "buildLeagues": "node ./seedData/seedLeagues.js",
-    "buildTeams": "node ./seedData/seedTeams.js",
-    "seed": "run-s buildUsers buildLeagues buildTeams"
+    "buildTeams": "node ./seedData/seedTeams.js"
   },
   "keywords": [],
   "author": "",
