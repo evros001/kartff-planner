@@ -13,7 +13,6 @@ const PORT = process.env.PORT || 5500;
 app.use(cors());
 
 //import routes
-const TodoItemRoutes = require('./routes/todoItems');
 const NflPlayersRoutes = require('./routes/nflPlayers');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
