@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Logout from '../Logout/Logout';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -30,6 +31,7 @@ const Users = () => {
           </>
         })}
       </span>
+      <Logout />
     </div>
   )
 }

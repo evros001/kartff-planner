@@ -5,6 +5,9 @@ import SignUp from './components/SignUp/signup';
 import LogIn from './components/LogIn/login';
 import Roster from './components/Roster/Roster';
 import Users from './components/Users/Users';
+import StandardLayout from './components/LayoutComponents/StandardLayout/StandardLayout';
+import ContentContainer from './components/LayoutComponents/ContentContainer/ContentContainer';
+import Navagation from './components/LayoutComponents/Navagation/Navagation';
 import axios from 'axios';
 import './App.css';
 
@@ -21,6 +24,12 @@ function App() {
         <Route path="/login" exact element={<LogIn />} />
         <Route path="/" exact element={<Navigate replace to="/login" />} />
         <Route path="/roster" exact element={<Navigate replace to="/login" />} />
+        <Route path="/welcome" exact element={
+          <StandardLayout>
+            <Navagation />
+            <ContentContainer /> 
+          </StandardLayout>
+        } /> 
       </Routes>
     </div>
   );
