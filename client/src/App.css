@@ -1,38 +1,31 @@
-.App {
-  text-align: center;
+/* IMPORT FONTS */
+
+@font-face {
+  font-family: "MarioColor";
+  src:url("./assets/fonts/mario-color.otf") format("opentype");
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: "MarioOutline";
+  src: url("./assets/fonts/mario-outline.otf") format("opentype");
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: "MarioWhite";
+  src: local("MarioWhite"), url("./assets/fonts/mario-white.otf") format("opentype");
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@font-face {
+  font-family: "MarioColorWoff";
+  src:url("./assets/fonts/mario-color.woff") format('woff');
 }
 
-.App-link {
-  color: #61dafb;
+@font-face {
+  font-family: "MarioOutlineWoff";
+  src: url("./assets/fonts/mario-outline.woff") format('woff');
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: "MarioWhiteWoff";
+  src: local("MarioWhite"), url("./assets/fonts/mario-white.woff") format('woff');
 }

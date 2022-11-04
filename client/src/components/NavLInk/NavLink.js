@@ -5,22 +5,14 @@ import NavMenu from '../../NavMenu/NavMenu';
 import NavLink from '../../NavLink/NavLink';
 
 
-const Navagation = () => {
+const NavLink = () => {
     const [links, setLinks] = useState([]);
 
     return (
         <div className={styles.container}>
-            <div>
-            <NavMenu />
-            <NavLogo />
-            </div>
-            <div className={styles.link_container}>
-                { links && links.map((link) => {
-                    return <NavLink link={link} />
-                })}
-            </div>
+            <a href='#'></a>
         </div>
     ) 
 }
 
-export default Navagation;
+export default NavLink;

@@ -1,0 +1,16 @@
+@use '../../assets/utilities/_variables.scss' as vars;
+
+.brand_container {
+    display: flex;
+}
+
+.brand {
+    font-size: 4em;
+}
+
+.k {color: vars.$red;}
+.a {color: vars.$yellow;}
+.r { color: vars.$blue;}
+.t {color: vars.$green;}
+.f {color: vars.$red;}
+.f2 {color: vars.$green;}
