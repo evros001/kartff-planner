@@ -1,16 +1,13 @@
 import React, {useState} from 'react';
 import styles from './styles.module.scss';
-import NavLogo from '../../NavLogo/NavLogo';
-import NavMenu from '../../NavMenu/NavMenu';
-import NavLink from '../../NavLink/NavLink';
 
 
-const NavLink = () => {
-    const [links, setLinks] = useState([]);
+const NavLink = (props) => {
+    const {link, index} = props;
 
     return (
-        <div className={styles.container}>
-            <a href='#'></a>
+        <div className={styles.link_container} key={index}>
+            <a href={`/${link}`}>{link}</a>
         </div>
     ) 
 }

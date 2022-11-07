@@ -11,6 +11,9 @@ router.post('/', async (req, res) => {
     }
 
     const user = await User.findOne({email: req.body.email});
+    console.log("SERVER USER", user);
+    const sanitizedUser = {"firstName": user.firstName, "lastName": user.lastName, "email": user.email, "leagues": user.leagues ,"teams": user.teams}
+    
     if (!user) {
       return res.status(401).send({message: "Invalid Email or Password"});
     }
@@ -24,7 +27,7 @@ router.post('/', async (req, res) => {
 
     //if email and pw are valid
     const token = user.generateAuthToken();
-    res.status(200).send({data: token, message: "Logged in successfully"});
+    res.status(200).send({data: token, user: sanitizedUser, message: "Logged in successfully"});
   } catch (err) {
     console.log(err);
     res.status(500).send({message: "Internal Server Error"});

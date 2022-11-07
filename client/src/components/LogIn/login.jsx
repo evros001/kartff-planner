@@ -21,7 +21,7 @@ const LogIn = () => {
     try {
       const url = 'http://localhost:5500/api/auth';
       const {data: res} = await axios.post(url, data);
-      localStorage.setItem("token", res.data);
+      localStorage.setItem("token", JSON.stringify(res));
       window.location= '/';
       console.log(res.message)
     } catch (err) {
@@ -66,7 +66,6 @@ const LogIn = () => {
           <Link to="/signup">
             <button>Sign Up</button>
           </Link>
-          
         </div>
       </div>
     </div>

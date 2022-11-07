@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        {user && <Route path="/" exact element={<Main />} />}
+        {user && <Route path="/" exact element={<Navigate replace to="/welcome" />} />}
         {user && <Route path="/roster" exact element={<Roster />} />}
         <Route path="/users" exact element={<Users />} />
         <Route path="/signup" exact element={<SignUp />} />

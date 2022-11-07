@@ -1,21 +1,6 @@
 /* IMPORT FONTS */
 
 @font-face {
-  font-family: "MarioColor";
-  src:url("./assets/fonts/mario-color.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "MarioOutline";
-  src: url("./assets/fonts/mario-outline.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "MarioWhite";
-  src: local("MarioWhite"), url("./assets/fonts/mario-white.otf") format("opentype");
-}
-
-@font-face {
   font-family: "MarioColorWoff";
   src:url("./assets/fonts/mario-color.woff") format('woff');
 }
