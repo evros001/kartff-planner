@@ -1,3 +1,4 @@
+
 import React, {useState, useContext} from 'react';
 import styles from './styles.module.scss';
 import NavLogo from '../../NavLogo/NavLogo';
@@ -8,7 +9,8 @@ import NavLink from '../../NavLink/NavLink';
 const Navagation = () => {
     const [links, setLinks] = useState(["About", "Account", "Roster", "Lineup", "League" ]);
     console.log('links', links);
-    const user = useContext(UserContext);
+    // const user = useContext();
+    // console.log('user inside navagation compoenent', user);
 
     return (
         <div className={styles.container}>
@@ -21,7 +23,7 @@ const Navagation = () => {
                     return <NavLink link={link} index={index} />
                 })}
             </div>
-            <div>{user.email}</div>
+            {/* <div>{user.email}</div> */}
         </div>
     ) 
 }

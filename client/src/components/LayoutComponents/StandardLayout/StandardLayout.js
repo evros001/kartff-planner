@@ -1,9 +1,9 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { createContext } from 'react';
 import styled from 'styled-components';
 import Logout from '../../Logout/Logout';
 
 const ContentContainer = styled.div`
-    displayL flex;
+    display: flex;
 `;
 
 const NavBar = styled.div`
@@ -11,8 +11,11 @@ const NavBar = styled.div`
 `;
 
 const Container = styled.div`
-    displayL flex;
+    display: flex;
 `;
+
+// create user context
+const UserContext = createContext();
 
 const StandardLayout = ({
     children,
@@ -21,10 +24,12 @@ const StandardLayout = ({
 }) => {
     // const [user, setUser] = useState(null);
     const [top, bottom] = children;
-    const UserContext = createContext()
 
-    const user = JSON.parse(localStorage.getItem("token"))
-    console.log("user at Standard Layout Compnent", user);
+    if (localStorage.getItem("token")) {
+        console.log("user at Standard Layout Compnent", localStorage.getItem("token"));
+        const user = JSON.parse(localStorage.getItem("token"));
+    }
+    
 
     
     // useEffect(() => {
@@ -41,7 +46,7 @@ const StandardLayout = ({
     //   }, [])
 
     return (
-        <UserContext.Provider value={user}>
+        <>
             <Container>
                 <NavBar weight={topWeight}>
                     {top}
@@ -51,7 +56,7 @@ const StandardLayout = ({
                 </ContentContainer>
             </Container> 
             <Logout />
-        </UserContext.Provider>
+        </>
     )
 }
 
