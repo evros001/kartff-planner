@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import SignUp from '../SignUp/signup';
 import LogIn from '../LogIn/login';
@@ -7,11 +7,12 @@ import Users from '../Users/Users';
 import StandardLayout from '../LayoutComponents/StandardLayout/StandardLayout';
 import ContentContainer from '../LayoutComponents/ContentContainer/ContentContainer';
 import Navagation from '../LayoutComponents/Navagation/Navagation';
+import { UserContext } from '../UserContext/UserContext';
 
 
 
 function Router(props) {
-  const {user} = props; 
+  const user = useContext(UserContext); 
   console.log('render', user)
 
   return (
