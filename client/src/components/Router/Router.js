@@ -6,7 +6,7 @@ import Roster from '../Roster/Roster';
 import Users from '../Users/Users';
 import StandardLayout from '../LayoutComponents/StandardLayout/StandardLayout';
 import ContentContainer from '../LayoutComponents/ContentContainer/ContentContainer';
-import Navagation from '../LayoutComponents/Navagation/Navagation';
+import Navagation from '../Navagation/Navagation';
 import { UserContext } from '../UserContext/UserContext';
 
 

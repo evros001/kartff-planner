@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: right;
+}
+
+.account_container {
+  display: flex;
+  justify-content: right;
+  align-items: baseline;
+
+  .email {
+    padding-right: .5rem;
+  }
+}

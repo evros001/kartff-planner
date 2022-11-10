@@ -1,7 +1,8 @@
-@use '../../assets/utilities/_variables.scss' as vars;
+@use '../../../assets/utilities/_variables.scss' as vars;
 
 .brand_container {
     display: flex;
+    font-family: MarioOutlineWoff;
 }
 
 .brand {

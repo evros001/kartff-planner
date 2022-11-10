@@ -14,3 +14,7 @@
   font-family: "MarioWhiteWoff";
   src: local("MarioWhite"), url("./assets/fonts/mario-white.woff") format('woff');
 }
+
+body {
+  margin: 0;
+}
