@@ -3,10 +3,12 @@ import styles from './styles.module.scss';
 import NavMenu from '../NavMenu/NavMenu';
 
 
-const NavLeft = () => {
+const NavLeft = (props) => {
+    const { toggleMenu, menuOpen } = props
+    
     return (
         <div className={styles.container}>
-          <NavMenu />
+          <NavMenu toggleMenu={toggleMenu} menuOpen={menuOpen}/>
         </div>
     ) 
 }

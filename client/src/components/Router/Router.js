@@ -4,9 +4,8 @@ import SignUp from '../SignUp/signup';
 import LogIn from '../LogIn/login';
 import Roster from '../Roster/Roster';
 import Users from '../Users/Users';
-import StandardLayout from '../LayoutComponents/StandardLayout/StandardLayout';
-import ContentContainer from '../LayoutComponents/ContentContainer/ContentContainer';
-import Navagation from '../Navagation/Navagation';
+import Home from '../Pages/Home/Home';
+import Welcome from '../Pages/Welcome/Welcome';
 import { UserContext } from '../UserContext/UserContext';
 
 
@@ -19,18 +18,14 @@ function Router(props) {
     <Routes>  
       {user && <Route path="/" exact element={<Navigate replace to="/welcome" />} />}
       {user && <Route path="/roster" exact element={<Roster />} />}
-      <Route path="/users" exact element={<Users />} />
+      {user && <Route path="/home" exact element={<Home />} />}
+      {/* <Route path="/users" exact element={<Users />} />
       <Route path="/signup" exact element={<SignUp />} />
-      <Route path="/login" exact element={<LogIn />} />
-      <Route path="/" exact element={<Navigate replace to="/login" />} />
-      <Route path="/roster" exact element={<Navigate replace to="/login" />} />
-      <Route path="/welcome" exact element={
-        <StandardLayout>
-          <Navagation />
-          <ContentContainer /> 
-        </StandardLayout>
-      } />
-      </Routes>
+      <Route path="/login" exact element={<LogIn />} /> */}
+      {/* <Route path="/roster" exact element={<Navigate replace to="/welcome" />} /> */}
+      <Route path="/" element={<Navigate replace to="/welcome" />} />
+      <Route path="/welcome" exact element={<Welcome />} />
+    </Routes>
   );
 }
 

@@ -4,7 +4,6 @@ import NavLogo from '../NavLogo/NavLogo';
 
 
 const NavCenter = () => {
-    const [links, setLinks] = useState(["About", "Account", "Roster", "Lineup", "League" ]);
 
     return (
         <div className={styles.container}>
