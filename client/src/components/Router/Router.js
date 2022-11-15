@@ -13,11 +13,15 @@ import { UserContext } from '../UserContext/UserContext';
 function Router(props) {
   const user = useContext(UserContext); 
   console.log('render', user)
+  const pages = {
+    roster: 'roster',
+  }
 
   return (
     <Routes>  
       {user && <Route path="/" exact element={<Navigate replace to="/welcome" />} />}
-      {user && <Route path="/roster" exact element={<Roster />} />}
+      {/* {user && <Route path="/roster" exact element={<Roster />} />} */}
+      {user && <Route path="/roster" exact element={<Home display={pages.roster}/>} />}
       {user && <Route path="/home" exact element={<Home />} />}
       {/* <Route path="/users" exact element={<Users />} />
       <Route path="/signup" exact element={<SignUp />} />

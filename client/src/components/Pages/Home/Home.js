@@ -3,11 +3,12 @@ import StandardLayout from '../../LayoutComponents/StandardLayout/StandardLayout
 import Navagation from '../../Navagation/Navagation';
 import ContentContainer from '../../LayoutComponents/ContentContainer/ContentContainer';
 
-const Home = () => {
+const Home = (props) => {
+  const { display } = props
   return (
     <StandardLayout>
       <Navagation />
-      <ContentContainer /> 
+      <ContentContainer display={display} /> 
     </StandardLayout>
   )
 }
