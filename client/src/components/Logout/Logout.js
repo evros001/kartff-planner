@@ -8,7 +8,7 @@ const Logout = () => {
   }
 
   return (
-    <button className={styles.white_btn} onClick={handleLogout}>Logout</button>     
+    <button className={styles.btn} onClick={handleLogout}>Logout</button>     
   )
 }
 

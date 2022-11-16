@@ -15,20 +15,25 @@ function Router(props) {
   console.log('render', user)
   const pages = {
     roster: 'roster',
+    welcome: 'welcome',
+    home: 'home'
   }
 
   return (
     <Routes>  
-      {user && <Route path="/" exact element={<Navigate replace to="/welcome" />} />}
+      {user && <Route path="/welcome" exact element={<Navigate replace to="/home" />} />}
+      {user && <Route path="/" exact element={<Navigate replace to="/home" />} />}
       {/* {user && <Route path="/roster" exact element={<Roster />} />} */}
       {user && <Route path="/roster" exact element={<Home display={pages.roster}/>} />}
-      {user && <Route path="/home" exact element={<Home />} />}
+      {user && <Route path="/home" exact element={<Home display={pages.home}/>} />}
       {/* <Route path="/users" exact element={<Users />} />
       <Route path="/signup" exact element={<SignUp />} />
       <Route path="/login" exact element={<LogIn />} /> */}
       {/* <Route path="/roster" exact element={<Navigate replace to="/welcome" />} /> */}
+      <Route path="/roster" element={<Navigate replace to="/welcome" />} />
+      <Route path="/home" element={<Navigate replace to="/welcome" />} />
       <Route path="/" element={<Navigate replace to="/welcome" />} />
-      <Route path="/welcome" exact element={<Welcome />} />
+      <Route path="/welcome" exact element={<Welcome display={pages.welcome}/>} />
     </Routes>
   );
 }

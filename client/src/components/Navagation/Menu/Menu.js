@@ -4,6 +4,7 @@ import { UserContext } from '../../UserContext/UserContext';
 import NavLink from '../NavLink/NavLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import Logout from '../../Logout/Logout';
 
 
 
@@ -16,7 +17,7 @@ const Menu = (props) => {
       if (user) {
           setLinks(prevLinks => [...prevLinks, "Logout"])
       } else {
-          setLinks(prevLinks => [...prevLinks, "Sign In"])
+          setLinks(["Sign In", "Create Account"])
       }
   }, []);
 
@@ -27,7 +28,12 @@ const Menu = (props) => {
         </div>
         <div className={styles.menu_container}>
             {links.map((link, index) => {
-                return <NavLink link={link} key={index} />
+                if (link == 'Logout') {
+                  return <Logout key={index}/>
+                } else {
+                  return <NavLink link={link} key={index} />
+                }
+                
             })}
         </div>
       </div>
