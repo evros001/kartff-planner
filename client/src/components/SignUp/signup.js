@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 
 
 const SignUp = () => {
 
   const [data, setData] = useState({
-    firstName: '',
+    firstName: '', 
     lastName: '',
     email: '',
     password: '',
@@ -22,15 +22,31 @@ const SignUp = () => {
     setData({...data, [input.name]: input.value})
   }
 
+  const loginUser = async () => {
+    console.log("hit");
+    try {
+      const url = 'http://localhost:5500/api/auth';
+      const userData = { email: data.email, password: data.password }
+      const {data: res} = await axios.post(url, userData);
+      console.log("res", res);
+      localStorage.setItem("token", JSON.stringify(res));
+      window.location= '/';
+    } catch (err) {
+      console.log("err", err);
+      if (err.response && err.response.status >= 400 && err.response.status < 500 ) {
+        setError(err.response.data.message)
+      }
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('data', data);
     try {
       const url = 'http://localhost:5500/api/users';
       console.log('url', url);
-      const responseData = await axios.post(url, data);
-      console.log('data back', responseData);
-      navigate('/login')
+      const signUpResponse = await axios.post(url, data);
+      loginUser();
     } catch (err) {
       console.log('errror', err);
       if (err.response && err.response.status >= 400 && err.response.status < 500 ) {
@@ -42,12 +58,6 @@ const SignUp = () => {
   return (
     <div className={styles.signup_container}>
       <div className={styles.signup_form_container}>
-        <div className={styles.left}>
-          <h1>Have an Account Already?</h1>
-          <Link to="/login">
-            <button>Login</button>
-          </Link>
-        </div>
         <div className={styles.right}>
           <form onSubmit={handleSubmit}>
             <h1>Create Account</h1>

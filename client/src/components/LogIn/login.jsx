@@ -61,12 +61,6 @@ const LogIn = () => {
             <button type='submit' className={styles.green_btn}>Login</button>
           </form>
         </div>
-        <div className={styles.right}>
-          <h1>New Here?</h1>
-          <Link to="/signup">
-            <button>Sign Up</button>
-          </Link>
-        </div>
       </div>
     </div>
   )
