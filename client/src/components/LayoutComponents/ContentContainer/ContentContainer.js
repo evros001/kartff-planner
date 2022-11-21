@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import Roster from '../../Roster/Roster';
-import LoginSignup from '../../LoginSignup/LoginSignup';
-import CreateTeamsOrLeague from '../CreateTeamsOrLeague/CreateTeamsOrLeague'
+import OnboardUser from '../../OnboardUser/OnboardUser';
 
 const ContentContainer = (props) => {
     const { display } = props
@@ -13,7 +12,7 @@ const ContentContainer = (props) => {
                 display == 'roster' && <Roster />
             }
             {
-                display == 'welcome' && <LoginSignup />
+                display == 'welcome' && <OnboardUser />
             }
             {
                 display == 'home' && <Roster />
