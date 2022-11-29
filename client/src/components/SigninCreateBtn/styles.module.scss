@@ -1,0 +1,23 @@
+@use '../../assets/utilities/_variables.scss' as vars;
+
+.container {
+  background-color: vars.$blue;
+  min-width: 50px;
+  border-radius: 5px;
+  border: 1px solid white;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+  
+  a {
+    color: white;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: capitalize;
+  }
+  
+  &:hover {
+    background-color: vars.$blue-light;
+    border: 1px solid vars.$blue;
+  }
+}

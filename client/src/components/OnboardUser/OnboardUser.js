@@ -5,7 +5,7 @@ import StepTwo from "./SignupFlow/StepTwo/StepTwo";
 import StepThree from "./SignupFlow/StepThree/StepThree";
 
 const OnboardUser = () => {
-    const user = useContext(UserContext);
+    const [user] = useContext(UserContext);
 
     const [userStepOne, setUserStepOne] = useState(false);
     const [userStepTwo, setUserStepTwo] = useState(false);

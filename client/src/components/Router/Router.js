@@ -5,7 +5,7 @@ import Welcome from '../Pages/Welcome/Welcome';
 import { UserContext } from '../UserContext/UserContext';
 
 function Router(props) {
-  const user = useContext(UserContext); 
+  const [ user ] = useContext(UserContext); 
   console.log('render', user)
   const pages = {
     roster: 'roster',

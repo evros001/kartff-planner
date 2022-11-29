@@ -1,8 +1,14 @@
 import React from "react";
+import CreateUser from "../../../CreateUser/CreateUser";
 
 const StepOne = (props) => {
+    const { setUserStepOne } = props
     return (
-        <>StepOne Component</>
+        <>
+          <span>StepOne Component</span>
+          <CreateUser setUserStepOne={setUserStepOne}/>
+        </>
+
     )
 }
 

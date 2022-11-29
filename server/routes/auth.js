@@ -28,8 +28,9 @@ router.post('/', async (req, res) => {
 
     //if email and pw are valid
     const token = user.generateAuthToken();
+    console.log("SERVER GENERATED TOKEN :", token);
     // res.status(200).send({data: token, user: sanitizedUser, message: "Logged in successfully"});
-    res.status(200).send({data: token, message: "Logged_in_successfully"});
+    res.status(200).send({token: token, message: "Logged_in_successfully"});
   } catch (err) {
     console.log(err);
     res.status(500).send({message: "Internal Server Error"});
@@ -37,12 +38,12 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  const token = JSON.parse(req.headers.authorization.split(" ")[1]);
-  console.log("REQ IN GET JWT", token.data);
+  console.log("req.headers", req.headers);
+  const token = req.headers.authorization.split(" ")[1];
+  console.log("req.token", token);
   const secret = process.env.JWT_PRIVATE_KEY
   try {
-    const user = jwt.verify(token.data, secret);
-    console.log("DECODED USER FROM JWT", user);
+    const user = jwt.verify(token, secret);
     const userInformation = await User.findOne({_id: user._id});
     console.log("DECODED userInformation FROM JWT", userInformation);
     const sanitizedUserInfo = {

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../UserContext/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
+import { createUser, loginUser, getAuthUser } from '../../api/api';
 
 
-const CreateUser = () => {
+const CreateUser = (props) => {
+  const { setUserStepOne } = props; 
 
   const [data, setData] = useState({
     firstName: '',
@@ -16,6 +18,9 @@ const CreateUser = () => {
   });
   const [error, setError] = useState();
 
+  const [ user, setUser ] = useContext(UserContext);
+  console.log("setUser", setUser);
+
   const navigate = useNavigate();
 
   const handleChange = ({currentTarget: input}) => {
@@ -26,13 +31,28 @@ const CreateUser = () => {
     e.preventDefault();
     console.log('data', data);
     try {
-      const url = 'http://localhost:5500/api/users';
-      console.log('url', url);
-      const responseData = await axios.post(url, data);
-      console.log('data back', responseData);
-      navigate('/login')
+      const {email, password} = data
+      
+      //create user
+      const responseData = await createUser(data);
+      console.log("create user respose data: ", responseData);
+      
+      //generate and set token
+      const token = await loginUser({"email": email,"password": password});
+      console.log("create user respose token: ", token);
+      localStorage.setItem("token", JSON.stringify(token.data));
+      
+      //set user context
+      const userData = await getAuthUser(token.data.token);
+      console.log("retrieve authed user from token: ", userData);
+      
+      //set newly created user
+      setUser(userData.data.user);
+      
+      //set to next step
+      setUserStepOne(true);
     } catch (err) {
-      console.log('errror', err);
+      console.log('create user errror', err);
       if (err.response && err.response.status >= 400 && err.response.status < 500 ) {
         setError(err.response.data.message)
       }

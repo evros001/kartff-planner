@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Router from './components/Router/Router';
 import axios from 'axios';
 import { UserContext } from './components/UserContext/UserContext';
+import { getAuthUser } from './api/api';
 import './App.css';
 
 function App() {
@@ -9,9 +10,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   const getUser = async (token) => {
-    const url = 'http://localhost:5500/api/auth';
-    const userData  = await axios.get(url, { headers: {"Authorization" : `Bearer ${token}`} });
-    console.log('USER DATA ON LOAD', userData);
+    // const url = 'http://localhost:5500/api/auth';
+    // const userData  = await axios.get(url, { headers: {"Authorization" : `Bearer ${token}`} });
+    const userData = await getAuthUser(token);
+    console.log('USER DATA ON LOAD UPDATED FE API', userData);
     setUser(userData.data.user);
     setIsLoading(false);
     return;
@@ -37,7 +39,7 @@ function App() {
             <div>Loading...</div>
           }
           { !isLoading &&
-            <UserContext.Provider value={user}>
+            <UserContext.Provider value={[user, setUser]}>
               <Router/>
             </UserContext.Provider>
           }
